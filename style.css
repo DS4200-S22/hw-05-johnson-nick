@@ -1,4 +1,16 @@
-
 body {
   font-family: Arial;
+}
+
+
+.brushed {
+  stroke: black;
+  stroke-width: 3px;
+  opacity: 1 !important;
+
+}
+
+.non-brushed {
+  stroke: "transparent";
+
 }
