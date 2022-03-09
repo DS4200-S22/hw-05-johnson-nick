@@ -11,8 +11,9 @@ const svg1 = d3.select("#vis-holder")
                 .attr("viewBox", [0, 0, width, height]); 
 
 // Initialize brush for Scatterplot1 and points. We will need these to be global. 
+let myCircles1;
 let brush1; 
-let myCircles1; 
+
 
 //TODO: append svg object to the body of the page to house Scatterplot2 (call it svg2)
 const svg2 = d3.select("#vis-holder")
@@ -23,8 +24,8 @@ const svg2 = d3.select("#vis-holder")
 
 
 //TODO: Initialize brush for Scatterplot2 and points. We will need these to be global.
-let brush2; 
 let myCircles2; 
+let brush2; 
 
 //TODO: append svg object to the body of the page to house bar chart 
 const svg3 = d3.select("#vis-holder")
@@ -55,15 +56,15 @@ d3.csv("data/iris.csv").then((data) => {
     xKey1 = "Sepal_Length";
     yKey1 = "Petal_Length";
 
-    // Find max x
+    // max x
     let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
 
-    // Create X scale
+    // Create scale for x
     x1 = d3.scaleLinear()
                 .domain([0,maxX1])
                 .range([margin.left, width-margin.right]); 
     
-    // Add x axis 
+    // Add axis for x 
     svg1.append("g")
         .attr("transform", `translate(0,${height - margin.bottom})`) 
         .call(d3.axisBottom(x1))   
@@ -76,15 +77,15 @@ d3.csv("data/iris.csv").then((data) => {
                       .text(xKey1)
       );
 
-    // Finx max y 
+    // max y 
     let maxY1 = d3.max(data, (d) => { return d[yKey1]; });
 
-    // Create Y scale
+    // Create scale for y
     y1 = d3.scaleLinear()
                 .domain([0, maxY1])
                 .range([height - margin.bottom, margin.top]); 
 
-    // Add y axis 
+    // Add axis for y
     svg1.append("g")
         .attr("transform", `translate(${margin.left}, 0)`) 
         .call(d3.axisLeft(y1)) 
