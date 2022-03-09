@@ -118,7 +118,7 @@ d3.csv("data/iris.csv").then((data) => {
     //TODO: Add brush1 to svg1
     svg1.call(brush1
       .on("start", clear)
-      .on("brush", updateChart1));
+      .on("brush", updateChart_1));
 
   }
 
@@ -189,7 +189,7 @@ d3.csv("data/iris.csv").then((data) => {
     //TODO: Add brush1 to svg2
     svg2.call(brush2
       .on("start", clear)
-      .on("brush", updateChart2));
+      .on("brush", updateChart_2));
   }
 
   //TODO: Barchart with counts of different species
@@ -273,21 +273,21 @@ d3.csv("data/iris.csv").then((data) => {
   
 
   // Call when Scatterplot1 is brushed 
-  function updateChart1(brushEvent) {
+  function updateChart_1(brushEvent) {
 
     //TODO: Find coorindates of brushed region
     let coords = d3.brushSelection(this);
 
     //brushed classed attribute for each circle in file
     // black outline
-    myCircles1.classed("brushed", function (d) {
+    myCircles1.classed("brush", function (d) {
       return isBrushed(coords, x1(d[xKey1]), y1(d[yKey1]))
       
     })
 
     //Outlines same in the 2nd scatterplot
     // corresponding to points within the brush region in the 1st scatter
-    myCircles2.classed("brushed", function (d) {
+    myCircles2.classed("brush", function (d) {
       return isBrushed(coords, x1(d[xKey1]), y1(d[yKey1]))
     })
 
@@ -295,7 +295,7 @@ d3.csv("data/iris.csv").then((data) => {
     
 
   // Call when Scatterplot2 is brushed 
-  function updateChart2(brushEvent) {
+  function updateChart_2(brushEvent) {
 
     //Find coordinates of brushed region 
     let coords = d3.brushSelection(this);
@@ -304,7 +304,7 @@ d3.csv("data/iris.csv").then((data) => {
     let selected_species = new Set();
 
     //Give bold outline to all points within the brush region in Scatterplot2 & collected names of brushed species
-    myCircles2.classed("brushed", function (d) {
+    myCircles2.classed("brush", function (d) {
 
       is_selected = isBrushed(coords, x2(d[xKey2]), y2(d[yKey2]));
 
@@ -315,12 +315,12 @@ d3.csv("data/iris.csv").then((data) => {
     })
 
     //Give bold outline to all points in Scatterplot1 corresponding to points within the brush region in Scatterplot2
-    myCircles1.classed("brushed", function (d) {
+    myCircles1.classed("brush", function (d) {
       return isBrushed(coords, x2(d[xKey2]), y2(d[yKey2]));
     })
 
     //Give bold outline to all bars in bar chart with corresponding to species selected by Scatterplot2 brush
-    myBar.classed("brushed", function (d) {
+    myBar.classed("brush", function (d) {
       return selected_species.has(d[xKey3]);
     })
 
